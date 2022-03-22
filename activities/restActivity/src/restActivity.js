@@ -116,8 +116,8 @@ define(["postmonger"], function (Postmonger) {
             httpVerb: httpVerb            
         }];
     
-        jsBody = document.getElementById("jsonBody").innerHTML;
-        for(var key in JSON.parse(jsBody)){
+        
+        for(var key in JSON.parse(jsonBody)){
             activity.schema.arguments.execute.outArguments[0][key] = { "dataType": "TEXT", "direction": "out","access": "visible"}
         }  
 
