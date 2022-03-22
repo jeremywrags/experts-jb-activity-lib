@@ -29,12 +29,24 @@ define(["postmonger"], function (Postmonger) {
             activity.arguments.execute.inArguments.length > 0
         );
 
+        const hasOutArguments = Boolean(
+            activity.arguments &&
+            activity.arguments.execute &&
+            activity.arguments.execute.outArguments &&
+            activity.arguments.execute.outArguments.length > 0
+        );
+
         
         const inArguments = hasInArguments ? activity.arguments.execute.inArguments : [];
+        const outArguments = hasOutArguments ? activity.arguments.execute.outArguments : [];
 
         if(hasInArguments){
             document.getElementById("endpointURL").value = inArguments[0].endpointURL;
             document.getElementById("endpointURL").value = inArguments[0].jsonBody;
+        }
+
+        if(hasOutArguments){
+            outArguments[0].test = {"dataType": "TEXT","direction": "out","access": "visible"}
         }
         console.log('-------- triggered:onInitActivity({obj}) --------');
         console.log('activity:\n ', JSON.stringify(activity, null, 4));
@@ -55,10 +67,7 @@ define(["postmonger"], function (Postmonger) {
         const jsonBodyArgument = inArguments.find((arg) => arg.jsonBody);
         console.log('jsonBody Argument', jsonBodyArgument.jsonBody);
         if (jsonBodyArgument) {
-            updateJsonBody(jsonBodyArgument.jsonBody);
-            activity.schema.execute.outArguments[0].test = {"dataType": "TEXT",
-            "direction": "out",
-            "access": "visible"}
+            updateJsonBody(jsonBodyArgument.jsonBody);            
         }
         
 
