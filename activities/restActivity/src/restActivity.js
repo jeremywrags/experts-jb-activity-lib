@@ -50,6 +50,12 @@ define(["postmonger"], function (Postmonger) {
         if (endpointArgument) {
             updateEndpointURL(endpointArgument.endpointURL);
         }
+
+        const jsonBodyArgument = inArguments.find((arg) => arg.jsonBody);
+        console.log('jsonBody Argument', jsonBodyArgument.jsonBody);
+        if (jsonBodyArgument) {
+            updateJsonBody(endpointArgument.jsonBody);
+        }
         
 
         // if a discountCode back argument was set, show the message in the view.
@@ -65,6 +71,10 @@ define(["postmonger"], function (Postmonger) {
 
     function updateEndpointURL(endpointURL){
         document.getElementById("endpointURL").value = endpointURL;
+
+    }
+    function updateJsonBody(jsonBody){
+        document.getElementById("jsonBody").value = jsonBody;
 
     }
 
