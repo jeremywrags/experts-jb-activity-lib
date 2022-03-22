@@ -29,8 +29,10 @@ function triggerEmail() {
  }
 
  // Event handlers
- $('#submit')
-   .click(triggerEmail)
+ $('#submit').on("click", function(){
+  triggerEmail();
+ })
+   
  
 
 

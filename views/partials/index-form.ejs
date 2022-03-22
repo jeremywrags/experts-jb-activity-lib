@@ -1,52 +1,61 @@
 <div class="slds-align_absolute-center">
-    <div class="slds-size_8-of-12 ">
+  <div class="slds-size_8-of-12 ">
 
-        <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate slds-m-bottom_small"
-            title="Example Form">Example Form</h2>
+      <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate slds-m-bottom_small"
+          title="Example Form">Create new App Entry</h2>
+      <form id="imageForm" enctype="multipart/form-data" action="/image/uploadfile" method="POST"> 
 
-        <fieldset class="slds-form-element slds-form-element_compound">
+      <fieldset class="slds-form-element slds-form-element_compound">
+          <div class="slds-form-element__control">
             <div class="slds-form-element__control">
-                <div class="slds-form-element__row">
-                    <div class="slds-size_1-of-2">
-                        <div class="slds-form-element">
-                            <label class="slds-form-element__label" for="firstName"> <abbr class="slds-required"
-                                    title="required">* </abbr>First Name</label>
-                            <div class="slds-form-element__control">
-                                <input type="text" id="firstName" class="slds-input" placeholder="Will" required="" />
-                            </div>
-                        </div>
+              <div class="slds-form-element__row">
+                  <div class="slds-size_1-of-2">
+                      <div class="slds-form-element">
+                          <label class="slds-form-element__label" for="appName"> <abbr class="slds-required"
+                                  title="required">* </abbr>App Name</label>
+                          <div class="slds-form-element__control">
+                              <input type="text" id="appName" name="appName" class="slds-input" placeholder="Enter the name for the JB Activity" required="" />
+                          </div>
+                      </div>
+                  </div>
+                  <div class="slds-size_1-of-2">
+                      <div class="slds-form-element">
+                          <label class="slds-form-element__label" for="description"> <abbr class="slds-required"
+                                  title="required">* </abbr>App Description</label>
+                          <div class="slds-form-element__control">
+                              <input type="text" id="description" name="description" class="slds-input" placeholder="Riker" required="" />
+                          </div>
+                      </div>
+                  </div>
+              </div>              
+          </div>
+              <div class="slds-form-element">
+                  <span class="slds-form-element__label" id="file-selector-primary-label-105">App Icon</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-file-selector slds-file-selector_images">
+                      <div class="slds-file-selector__dropzone">
+                        <input type="file" class="slds-file-selector__input slds-assistive-text" accept="image/png" name="myFile" id="myFile" aria-labelledby="file-selector-primary-label-105 file-selector-secondary-label106" />
+                        <label class="slds-file-selector__body" for="myFile" id="file-selector-secondary-label106">
+                          <span class="slds-file-selector__button slds-button slds-button_neutral">
+                            <svg class="slds-button__icon slds-button__icon_left" aria-hidden="true">
+                              <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#upload"></use>
+                            </svg>Upload Image</span>
+                          <span class="slds-file-selector__text slds-medium-show">or Drop Image</span>
+                        </label>
+                      </div>
                     </div>
-                    <div class="slds-size_1-of-2">
-                        <div class="slds-form-element">
-                            <label class="slds-form-element__label" for="lastName"> <abbr class="slds-required"
-                                    title="required">* </abbr>Last Name</label>
-                            <div class="slds-form-element__control">
-                                <input type="text" id="lastName" class="slds-input" placeholder="Riker" required="" />
-                            </div>
-                        </div>
-                    </div>
+                  </div>
                 </div>
-                <div class="slds-form-element__row">
-                    <div class="slds-size_1-of-1">
-                        <div class="slds-form-element">
-                            <label class="slds-form-element__label" for="email"> <abbr class="slds-required"
-                                    title="required">* </abbr>Email</label>
-                            <div class="slds-form-element__control">
-                                <input type="text" id="email" class="slds-input" placeholder="will.riker@starfleet.org"
-                                    required="" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </fieldset>
+          </div>
+      </fieldset>
 
-        <div class="slds-p-top_small">
-            <button class="slds-button slds-button_brand slds-align_absolute-center" id="submit" value="submit">
-                <svg class="slds-button__icon slds-button__icon_left" aria-hidden="true">
-                    <use xlink:href="slds/assets/icons/utility-sprite/svg/symbols.svg#send"></use>
-                </svg>Submit</button>
-        </div>
+      <div class="slds-p-top_small">
+          <button type="submit" class="slds-button slds-button_brand slds-align_absolute-center"  value="submit">
+              <svg class="slds-button__icon slds-button__icon_left" aria-hidden="true">
+                  <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#send"></use>
+              </svg>Submit</button>
+      </div>
+      </form>
 
-    </div>
+  </div>
 </div>

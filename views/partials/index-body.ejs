@@ -1,10 +1,8 @@
 <div class="slds-align_absolute-center">
     <div class="slds-size_8-of-12 ">
-
         <div class="slds-section slds-is-open">
             <h3 class="slds-section__title slds-theme_shade">
-                <span class="slds-truncate slds-p-horizontal_small" title="Experts Baseline App">Experts Baseline
-                    App</span>
+                <span class="slds-truncate slds-p-horizontal_small" title="Experts Baseline App">Your Apps</span>
             </h3>
             <div class="slds-align_absolute-center slds-m-top_small">
                 <div aria-hidden="false" class="slds-section__content">
@@ -15,7 +13,47 @@
                     <hr>
                 </div>
             </div>
+            <div>
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+                    aria-label="Example default base table of Opportunities">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Opportunity Name">App Icon</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Account Name">App Name</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Close Date">Description</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Stage">Activity URL</div>
+                            </th>                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(var i=0; i < jbApps.length; i++){%>                            
+                            <tr class="slds-hint-parent">
+                                <th data-label="App Icon" scope="row">
+                                    <div class="slds-truncate" title="AppIcon">
+                                        <img style="width:100px;" src="data:image/png;base64, <%= jbApps[i].imageData %>" alt="Alt Text" />
+                                    </div>
+                                </th>
+                                <td data-label="Account Name">
+                                    <div class="slds-truncate" title="Cloudhub"><%= jbApps[i].name %></div>
+                                </td>
+                                <td data-label="Close Date">
+                                    <div class="slds-truncate" title="4/14/2015"><%= jbApps[i].description %></div>
+                                </td>
+                                <td data-label="Prospecting">
+                                    <div class="slds-truncate" title="Prospecting">https://experts-jb-activity-lib.herokuapp.com/restActivity/<%= jbApps[i].name %></div>
+                                </td>                            
+                            </tr>  
+                        <%}%>                      
+                    </tbody>
+                </table>                
+            </div>
         </div>
-
     </div>
 </div>

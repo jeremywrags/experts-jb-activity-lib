@@ -4,34 +4,24 @@
 <head>
     <!-- Header -->
     <% include partials/header %>
-    <!-- /Header -->
+        <!-- /Header -->
 </head>
 
 <body>
-    <div>
-    <!-- Navigation -->
-    <% include partials/nav %>
-    <!-- /Navigation -->    
-
-    <!-- Body -->
-    <% include partials/index-body %>
-    <!-- /Body -->
-
-    <!-- Form -->
-    <% include partials/index-form %>
-    <!-- /Form -->
-
-    <!-- Spinner -->
-    <% include partials/spinner %>
-    <!-- /Spinner -->
-
-    <!-- Status -->
-    <% include partials/index-status %>
-    <!-- /Status -->
+    <div class="slds-grid slds-grid_vertical">
+        <div class="slds-col">
+            <% include partials/nav %>
+        </div>
+        <div class="slds-col">
+            <% include partials/index-form %>
+            <% include partials/index-body %>                
+        </div>
+        <div class="slds-col">
+            <% include partials/spinner %>
+            <% include partials/index-status %>
+        </div>
     </div>
-    <!-- Navigation -->
-    <% include partials/appLauncher %>
-    <!-- /Navigation -->
+    <div>
 </body>
 
 <script src="javascripts/main.js"></script>

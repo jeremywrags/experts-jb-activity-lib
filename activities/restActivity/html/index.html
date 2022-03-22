@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Rest Activity</title>
+    <link rel="stylesheet" type="text/css" href="/slds/styles/salesforce-lightning-design-system.css">
+    <style>
+        .textAreaHeight {
+            width: 450px;
+            height: 160px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"
+        integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript">
+        (function () {
+            var config = {
+                baseUrl: "./src/",
+            };
+
+            var dependencies = ["restActivity"];
+
+            require(config, dependencies);
+        })();
+    </script>
+</head>
+
+<body>
+
+
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col slds-size_1-of-3">
+            <div class="slds-form-element">
+
+                <div class="slds-form-element__control">
+                    <div class="slds-select_container">
+                        <select  class="slds-select" id="httpVerb">
+                            <option>POST</option>
+                            <option>GET</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-col slds-size_2-of-3">
+            <div class="slds-form-element">
+                <div class="slds-form-element__control">
+                    <input type="text" id="endpointURL" placeholder="Endpoint URL" required="" class="slds-input" />
+                </div>
+            </div>
+        </div>        
+    </div>    
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col slds-size_3-of-3">
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="textarea-id-01">JSON Body</label>
+                <div class="slds-form-element__control">
+                    <textarea id="jsonBody" class="textAreaHeight"></textarea>
+                </div>
+            </div>    
+        </div>
+    </div>
+
+    <div class="slds-docked-form-footer" style="justify-content: flex-end">
+        <button id="cancel" type="button" class="slds-button slds-button_neutral">Cancel</button>
+        <button id="done" type="button" class="slds-button slds-button_brand slds-m-right--medium">Done</button>
+    </div>
+</body>
+
+</html>

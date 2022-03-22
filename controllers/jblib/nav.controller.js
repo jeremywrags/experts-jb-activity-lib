@@ -1,6 +1,6 @@
 const db = require("../../models");
-const Nav = db.ddu.navs;
-const Op = db.ddu.Sequelize.Op;
+const Nav = db.jblib.navs;
+const Op = db.jblib.Sequelize.Op;
 
 // Create and Save a new WaffleItem
 exports.create = (req, res) => {    
