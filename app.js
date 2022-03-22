@@ -53,6 +53,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/assets', express.static(__dirname + '/node_modules/@salesforce-ux/design-system/assets/'));
+app.use('/postmonger', express.static(path.join(__dirname, '/node_modules/postmonger')));
+
 app.use(express.static(__dirname + '/node_modules/jquery/dist'));
 
 //Include app routes
