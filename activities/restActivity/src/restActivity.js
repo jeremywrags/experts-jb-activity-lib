@@ -29,10 +29,14 @@ define(["postmonger"], function (Postmonger) {
             activity.arguments.execute.inArguments.length > 0
         );
 
+        
         const inArguments = hasInArguments ? activity.arguments.execute.inArguments : [];
 
+        if(hasInArguments){
+            document.getElementById("endpointURL").value = inArguments[0].endpointURL;
+        }
         console.log('-------- triggered:onInitActivity({obj}) --------');
-        console.log('activitysss:\n ', JSON.stringify(activity, null, 4));
+        console.log('activity:\n ', JSON.stringify(activity, null, 4));
         console.log('Has In Arguments: ', hasInArguments);
         console.log('inArguments', inArguments);
         console.log('-------------------------------------------------');
@@ -40,6 +44,7 @@ define(["postmonger"], function (Postmonger) {
         // check if this activity has an incoming argument.
         // this would be set on the server side when the activity executes
         // (take a look at execute() in ./discountCode/app.js to see where that happens)
+
         const eventTypeArgument = inArguments.find((arg) => arg.eventType);
 
         console.log('eventType Argument', eventTypeArgument);

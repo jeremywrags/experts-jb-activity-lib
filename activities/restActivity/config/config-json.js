@@ -23,10 +23,10 @@ module.exports = function configJSON(req) {
               contactIdentifier: "{{Contact.Key}}"
             },
             {
-              jsonBody: ""
+              jsonBody: '{ key: "value"}'
             },
             {
-              endpointURL: ""
+              endpointURL: "https://experts-jb-activity-lib.herokuapp.com/api"
             }
           ],
           outArguments: []        
