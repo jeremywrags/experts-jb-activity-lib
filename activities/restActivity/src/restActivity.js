@@ -45,9 +45,10 @@ define(["postmonger"], function (Postmonger) {
         // this would be set on the server side when the activity executes
         // (take a look at execute() in ./discountCode/app.js to see where that happens)
 
-        const eventTypeArgument = inArguments.find((arg) => arg.eventType);
+        const endpointArgument = inArguments.find((arg) => arg.endpointURL);
+        console.log('Endpoint Argument', endpointArgument);
 
-        console.log('eventType Argument', eventTypeArgument);
+        
 
         // if a discountCode back argument was set, show the message in the view.
         //if (eventTypeArgument) {
