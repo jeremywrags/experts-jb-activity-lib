@@ -91,6 +91,7 @@ define(["postmonger"], function (Postmonger) {
     }
     function updateJsonBody(jsonBody){
         document.getElementById("jsonBody").innerHTML = jsonBody;
+        activity.schema.arguments.execute.outArguments[0].test = { "dataType": "TEXT", "direction": "out","access": "visible"}
     }
 
     function onDoneButtonClick() {
