@@ -14,8 +14,7 @@
                 </div>
             </div>
             <div>
-                <table class="slds-table slds-table_cell-buffer slds-table_bordered"
-                    aria-label="Example default base table of Opportunities">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-label="Example default base table of Opportunities">
                     <thead>
                         <tr class="slds-line-height_reset">
                             <th class="" scope="col">
@@ -30,6 +29,9 @@
                             <th class="" scope="col">
                                 <div class="slds-truncate" title="Stage">Activity URL</div>
                             </th>                            
+                            <th>
+                                <div class="slds-truncate" title="Stage">Edit</div>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,14 +43,29 @@
                                     </div>
                                 </th>
                                 <td data-label="Account Name">
-                                    <div class="slds-truncate" title="Cloudhub"><%= jbApps[i].name %></div>
+                                    <span id="appName_label_<%= jbApps[i].id %>"><%= jbApps[i].name %></span>
+                                    <span id="appName_input_<%= jbApps[i].id %>" class="slds-hidden">                                                                        
+                                        <input type="text" id="appName" name="appName" class="slds-input" placeholder="" required="" value="<%= jbApps[i].name %>" />                                        
+                                    </span>
                                 </td>
-                                <td data-label="Close Date">
-                                    <div class="slds-truncate" title="4/14/2015"><%= jbApps[i].description %></div>
+                                <td data-label="Account Name">
+                                    <span id="appDesc_label_<%= jbApps[i].id %>"><%= jbApps[i].description %></span>
+                                    <span id="appDesc_input_<%= jbApps[i].id %>" class="slds-hidden">                                                                        
+                                        <input type="text" id="appDescription" name="appDescription" class="slds-input" placeholder="" required="" value="<%= jbApps[i].description %>" />                                        
+                                    </span>
+                                    
                                 </td>
                                 <td data-label="Prospecting">
                                     <div class="slds-truncate" title="Prospecting">https://experts-jb-activity-lib.herokuapp.com/jbActivity/restActivity/<%= jbApps[i].name %></div>
-                                </td>                            
+                                </td>              
+                                <td>
+                                    <span id="app_<%= jbApps[i].id %>" class="slds-icon_container slds-icon-utility-save editIcon" title="Description of icon when needed">
+                                        <svg id="appIcon_<%= jbApps[i].id %>" class="slds-icon slds-icon-text-default" aria-hidden="true">
+                                          <use href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                        </svg>
+                                        <span class="slds-assistive-text">Description of icon when needed</span>
+                                      </span>
+                                </td>              
                             </tr>  
                         <%}%>                      
                     </tbody>

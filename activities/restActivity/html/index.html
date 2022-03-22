@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Rest Activity</title>
-    <link rel="stylesheet" type="text/css" href="/slds/styles/salesforce-lightning-design-system.css">
+    <link rel="stylesheet" type="text/css" href="/assets/styles/salesforce-lightning-design-system.css">
     <style>
         .textAreaHeight {
             width: 450px;
@@ -23,54 +23,77 @@
             var config = {
                 baseUrl: "./src/",
             };
-
             var dependencies = ["restActivity"];
-
             require(config, dependencies);
         })();
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).on("blur", "#jsonBody", function () {
+                try {
+                    JSON.parse($(this).val());
+                } catch (e) {
+                    alert(e)
+                    return false;
+                }
+                return true;
+            })
+        })
     </script>
 </head>
 
 <body>
 
-
-    <div class="slds-grid slds-gutters">
-        <div class="slds-col slds-size_1-of-3">
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_1-of-12">
             <div class="slds-form-element">
-
-                <div class="slds-form-element__control">
+                <div style="width: 100px;" class="slds-form-element__control">
                     <div class="slds-select_container">
-                        <select  class="slds-select" id="httpVerb">
+                        <select class="slds-select" id="httpVerb">
                             <option>POST</option>
                             <option>GET</option>
                         </select>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="slds-col slds-size_2-of-3">
+        </div>        
+        <div class="slds-col slds-size_11-of-12">
             <div class="slds-form-element">
                 <div class="slds-form-element__control">
-                    <input type="text" id="endpointURL" placeholder="Endpoint URL" required="" class="slds-input" />
+                    <input style="width: 300px;" type="text" id="endpointURL" placeholder="Endpoint URL" required=""
+                        class="slds-input" />
                 </div>
             </div>
-        </div>        
-    </div>    
-    <div class="slds-grid slds-gutters">
-        <div class="slds-col slds-size_3-of-3">
+        </div>
+        <div class="slds-col slds-size_12-of-12">
             <div class="slds-form-element">
                 <label class="slds-form-element__label" for="textarea-id-01">JSON Body</label>
                 <div class="slds-form-element__control">
                     <textarea id="jsonBody" class="textAreaHeight"></textarea>
                 </div>
-            </div>    
+            </div>
+            <div id="status-container" class="slds-align_absolute-center" style="display:none;">                
+                    <hr>
+                    <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate slds-m-bottom_small"
+                        title="Status">
+                        Status
+                    </h2>                
+            </div>
         </div>
+        
+        <div class="slds-col slds-size_12-of-12">
+            <div >
+                <button id="cancel" type="button" class="slds-button slds-button_neutral">Cancel</button>
+                <button id="done" type="button" class="slds-button slds-button_brand slds-m-right--medium">Done</button>
+            </div>
+        </div>
+        
     </div>
 
-    <div class="slds-docked-form-footer" style="justify-content: flex-end">
-        <button id="cancel" type="button" class="slds-button slds-button_neutral">Cancel</button>
-        <button id="done" type="button" class="slds-button slds-button_brand slds-m-right--medium">Done</button>
-    </div>
+
+
+
+   
 </body>
 
 </html>

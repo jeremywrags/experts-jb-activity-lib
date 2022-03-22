@@ -15,7 +15,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
-//app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser("XuqgaLvRWwEeo8OSsZF9zAm3TkdY41cD"));
 
 const db = require("./models");
 //**This code will force the tables to drop and recreate. For productions comment out this code and run the line below. */
@@ -41,6 +41,7 @@ var indexRouter = require('./routes/index');
 var triggerEmailRouter = require('./routes/triggerEmail');
 var activityRouter = require('./routes/jbActivity');
 var apiRouter = require('./routes/api');
+var authRouter = require("./routes/auth.routes")
 
 
 // view engine setup
@@ -62,6 +63,8 @@ app.use('/', indexRouter);
 app.use('/triggerEmail', triggerEmailRouter);
 app.use('/jbActivity', activityRouter);
 app.use('/api', apiRouter);
+app.use('/auth', authRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

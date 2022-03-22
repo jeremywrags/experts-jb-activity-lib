@@ -28,8 +28,8 @@ exports.findAll = (req, res) => {
     });
 };
 // Find a singl
-exports.findAll2 = () => {        
-  return JBApp.findAll()
+exports.findAll2 = (owner) => {        
+  return JBApp.findAll({ where : { createdBy : owner}})
     .then(data => {
       return data;
     })

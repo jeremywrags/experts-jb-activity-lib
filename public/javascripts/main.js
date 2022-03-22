@@ -56,6 +56,24 @@ $(document).ready(function() {
       $(this).toggleClass("slds-is-open");
       return false;
   });  
+
+  $(document).on("click", ".editIcon", function(){
+    let appID = $(this).attr("id").split("_")[1];
+    $("#appName_label_" + appID).toggleClass("slds-hidden");
+    $("#appName_input_" + appID).toggleClass("slds-hidden");
+    $("#appDesc_label_" + appID).toggleClass("slds-hidden");
+    $("#appDesc_input_" + appID).toggleClass("slds-hidden");
+    if($("#appIcon_" + appID).find("use").attr("href").includes("edit"))
+      $("#appIcon_" + appID).find("use").attr("href", "/assets/icons/utility-sprite/svg/symbols.svg#save");
+    else{
+      //Change the Icon and submit the change back to the server
+      $("#appIcon_" + appID).find("use").attr("href", "/assets/icons/utility-sprite/svg/symbols.svg#edit");
+
+      //Post updates back to the server
+    }
+      
+    
+  })
 });
 
 
