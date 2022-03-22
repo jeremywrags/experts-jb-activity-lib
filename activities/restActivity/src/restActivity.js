@@ -116,6 +116,11 @@ define(["postmonger"], function (Postmonger) {
             httpVerb: httpVerb            
         }];
     
+        jsBody = document.getElementById("jsonBody").innerHTML;
+        for(var key in JSON.parse(jsBody)){
+            activity.schema.arguments.execute.outArguments[0][key] = { "dataType": "TEXT", "direction": "out","access": "visible"}
+        }  
+
         // you can set the name that appears below the activity with the name property
         //activity.name = `Rest API`;       
 
