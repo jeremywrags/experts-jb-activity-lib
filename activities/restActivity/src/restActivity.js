@@ -34,6 +34,7 @@ define(["postmonger"], function (Postmonger) {
 
         if(hasInArguments){
             document.getElementById("endpointURL").value = inArguments[0].endpointURL;
+            document.getElementById("endpointURL").value = inArguments[0].jsonBody;
         }
         console.log('-------- triggered:onInitActivity({obj}) --------');
         console.log('activity:\n ', JSON.stringify(activity, null, 4));
@@ -74,8 +75,7 @@ define(["postmonger"], function (Postmonger) {
 
     }
     function updateJsonBody(jsonBody){
-        document.getElementById("jsonBody").value = jsonBody;
-
+        document.getElementById("jsonBody").innerHTML = jsonBody;
     }
 
     function onDoneButtonClick() {
