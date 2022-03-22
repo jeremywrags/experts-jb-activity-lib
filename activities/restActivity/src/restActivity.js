@@ -46,8 +46,10 @@ define(["postmonger"], function (Postmonger) {
         // (take a look at execute() in ./discountCode/app.js to see where that happens)
 
         const endpointArgument = inArguments.find((arg) => arg.endpointURL);
-        console.log('Endpoint Argument', endpointArgument);
-
+        console.log('Endpoint Argument', endpointArgument.endpointURL);
+        if (endpointArgument) {
+            updateEndpointURL(endpointArgument.endpointURL);
+        }
         
 
         // if a discountCode back argument was set, show the message in the view.
@@ -58,6 +60,11 @@ define(["postmonger"], function (Postmonger) {
         // if the discountCode back argument doesn't exist the user can pick
         // a discountCode message from the drop down list. the discountCode back arg
         // will be set once the journey executes the activity
+
+    }
+
+    function updateEndpointURL(endpointURL){
+        document.getElementById("endpointURL").value = endpointURL;
 
     }
 
