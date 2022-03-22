@@ -56,6 +56,9 @@ define(["postmonger"], function (Postmonger) {
         console.log('jsonBody Argument', jsonBodyArgument.jsonBody);
         if (jsonBodyArgument) {
             updateJsonBody(jsonBodyArgument.jsonBody);
+            activity.schema.execute.outArguments[0].test = {"dataType": "TEXT",
+            "direction": "out",
+            "access": "visible"}
         }
         
 
