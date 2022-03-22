@@ -55,7 +55,7 @@ define(["postmonger"], function (Postmonger) {
         const jsonBodyArgument = inArguments.find((arg) => arg.jsonBody);
         console.log('jsonBody Argument', jsonBodyArgument.jsonBody);
         if (jsonBodyArgument) {
-            updateJsonBody(endpointArgument.jsonBody);
+            updateJsonBody(jsonBodyArgument.jsonBody);
         }
         
 
