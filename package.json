@@ -1,0 +1,35 @@
+{
+  "name": "experts-slds-baseline-app",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "@salesforce-ux/design-system": "^2.14.3",
+    "appiphony-lightning-js": "^3.1.0",
+    "body-parser": "^1.19.2",
+    "bootstrap": "^4.3.1",
+    "bootswatch": "^4.3.1",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^16.0.0",
+    "ejs": "~2.5.7",
+    "express": "~4.16.0",
+    "file-system": "^2.2.2",
+    "fs": "0.0.1-security",
+    "http-errors": "~1.6.2",
+    "jquery": "^3.3.1",
+    "lightbox2": "^2.11.3",
+    "morgan": "~1.9.0",
+    "papaparse": "^5.3.0",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "request": "^2.88.0",
+    "sequelize": "^6.17.0",
+    "shape-json": "^1.2.4",
+    "ssl-express-www": "^3.0.8",
+    "uuid": "^3.3.2"
+  }
+}
