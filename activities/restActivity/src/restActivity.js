@@ -9,13 +9,12 @@ define(["postmonger"], function (Postmonger) {
 
     connection.on("initActivity", initialize);
     
-
-
     function onRender() {
         // JB will respond the first time 'ready' is called with 'initActivity'
         connection.trigger("ready");
         document.getElementById('done').addEventListener('click', onDoneButtonClick);
         document.getElementById('cancel').addEventListener('click', onCancelButtonClick);
+        setupExampleTestHarness();
     }
 
     function initialize(payload) {
@@ -96,5 +95,65 @@ define(["postmonger"], function (Postmonger) {
         // now request that Journey Builder closes the inspector/drawer
         connection.trigger('requestInspectorClose');
     }
+
+    // this function is for example purposes only. it sets ups a Postmonger
+// session that emulates how Journey Builder works. You can call jb.ready()
+// from the console to kick off the initActivity event with a mock activity object
+function setupExampleTestHarness() {
+
+    const isLocalhost = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    if (!isLocalhost) {
+        // don't load the test harness functions when running in Journey Builder
+        return;
+    }
+
+    const jbSession = new Postmonger.Session();
+    const jb = {};
+    window.jb = jb;
+
+    jbSession.on('setActivityDirtyState', function(value) {
+        console.log('[echo] setActivityDirtyState -> ', value);
+    });
+
+    jbSession.on('requestInspectorClose', function() {
+        console.log('[echo] requestInspectorClose');
+    });
+
+    jbSession.on('updateActivity', function(activity) {
+        console.log('[echo] updateActivity -> ', JSON.stringify(activity, null, 4));
+    });
+
+    jbSession.on('ready', function() {
+        console.log('[echo] ready');
+        console.log('\tuse jb.ready() from the console to initialize your activity')
+    });
+
+    // fire the ready signal with an example activity
+    jb.ready = function() {
+        jbSession.trigger('initActivity', {
+            name: '',
+            key: 'EXAMPLE-1',
+            metaData: {},
+            configurationArguments: {},
+            arguments: {
+                executionMode: "{{Context.ExecutionMode}}",
+                definitionId: "{{Context.DefinitionId}}",
+                activityId: "{{Activity.Id}}",
+                contactKey: "{{Context.ContactKey}}",
+                execute: {
+                    inArguments: [
+                        {
+                            discount: 10
+                        }
+                    ],
+                    outArguments: []
+                },
+                startActivityKey: "{{Context.StartActivityKey}}",
+                definitionInstanceId: "{{Context.DefinitionInstanceId}}",
+                requestObjectId: "{{Context.RequestObjectId}}"
+            }
+        });
+    };
+}
 
 });
