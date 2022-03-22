@@ -46,12 +46,15 @@ define(["postmonger"], function (Postmonger) {
         }
 
         if(hasOutArguments){
-            outArguments[0].test = {"dataType": "TEXT","direction": "out","access": "visible"}
+            
         }
         console.log('-------- triggered:onInitActivity({obj}) --------');
         console.log('activity:\n ', JSON.stringify(activity, null, 4));
         console.log('Has In Arguments: ', hasInArguments);
+        console.log('Has Out Arguments: ', hasOutArguments);
         console.log('inArguments', inArguments);
+        console.log('outArguments', outArguments);
+        console.log('schema', activity.schema);
         console.log('-------------------------------------------------');
 
         // check if this activity has an incoming argument.
