@@ -100,7 +100,7 @@ router.post('/restActivity/:activityName/execute', function (req, res) {
     //the Body will contain 2 elements the Schema that will be returned to JB and the poperties to send
     //to the endpoint. We DO NOT need to send the schema to the endpoint so we will extract the EndpointArguments
     let jsonBody = getInArgument(req.body,"jsonBody");    
-    let epArgs = JSON.parse(jsonBody.EndpointArguments);
+    let epArgs = JSON.parse(jsonBody).EndpointArguments;
     console.log("jsobBody             --------" + jsonBody)
     console.log("endpointArgs         --------" + epArgs);
 
