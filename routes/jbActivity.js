@@ -92,12 +92,17 @@ router.post('/restActivity/:activityName/execute', function (req, res) {
   console.log("req.body", JSON.stringify(req.body)); 
   console.log("---------------End JB Activity execute Route----------------");
   
+  
+
   try{            
   
     let url =     getInArgument(req.body,"endpointURL");
     let method =  getInArgument(req.body,"httpVerb");
-    let jsonBody = getInArgument(req.body,"jsonBody");    
     let ck = getContactKey(req.body);
+    //the Body will contain 2 elements the Schema that will be returned to JB and the poperties to send
+    //to the endpoint. We DO NOT need to send the schema to the endpoint so we will extract the EndpointArguments
+    let jsonBody = getInArgument(req.body,"jsonBody").EndpointArguments;    
+    
 
     var options = {
       'method': method ,
