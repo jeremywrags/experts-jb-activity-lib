@@ -17,7 +17,11 @@ define(["postmonger"], function (Postmonger) {
         setupExampleTestHarness();
     }
 
+    //This function is called when Journey Builder Opens your activity and displays the UI. The payload
+    //that is passed is basically a representation of your config.json + any data that JB has added
+
     function initialize(payload) {
+        
         // set the activity object from this payload. We'll refer to this object as we
         // modify it before saving.
         activity = payload;
@@ -40,6 +44,11 @@ define(["postmonger"], function (Postmonger) {
         const inArguments = hasInArguments ? activity.arguments.execute.inArguments : [];
         const outArguments = hasOutArguments ? activity.arguments.execute.outArguments : [];
 
+        //Set the initial values in the UI. These values are pulled from the inArguments section 
+        //of the config.json file and represent the initial state of your activity. As you make changes
+        //jb will keep an updated copy of the activity and send an updated version of the config.json 
+        //back and forth
+
         if(hasInArguments){
             document.getElementById("endpointURL").value = inArguments[0].endpointURL;
             document.getElementById("endpointURL").value = inArguments[0].jsonBody;
@@ -48,6 +57,7 @@ define(["postmonger"], function (Postmonger) {
         if(hasOutArguments){
             
         }
+
         console.log('-------- triggered:onInitActivity({obj}) --------');
         console.log('activity:\n ', JSON.stringify(activity, null, 4));
         console.log('Has In Arguments: ', hasInArguments);
@@ -72,16 +82,6 @@ define(["postmonger"], function (Postmonger) {
         if (jsonBodyArgument) {
             updateJsonBody(jsonBodyArgument.jsonBody);            
         }
-        
-
-        // if a discountCode back argument was set, show the message in the view.
-        //if (eventTypeArgument) {
-        //     get(eventTypeArgument.eventType);
-        //  }
-
-        // if the discountCode back argument doesn't exist the user can pick
-        // a discountCode message from the drop down list. the discountCode back arg
-        // will be set once the journey executes the activity
 
     }
 
@@ -116,7 +116,8 @@ define(["postmonger"], function (Postmonger) {
             httpVerb: httpVerb            
         }];
     
-        
+        //Empty the out schema so that when changes are made the removed items do not remain part of the Activity
+        activity.schema.arguments.execute.outArguments[0] = {};
         for(var key in JSON.parse(jsonBody)){
             activity.schema.arguments.execute.outArguments[0][key] = { "dataType": "TEXT", "direction": "out","access": "visible"}
         }  
