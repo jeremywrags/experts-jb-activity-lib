@@ -60,16 +60,32 @@ $(document).ready(function() {
   $(document).on("click", ".editIcon", function(){
     let appID = $(this).attr("id").split("_")[1];
     $("#appName_label_" + appID).toggleClass("slds-hidden");
-    $("#appName_input_" + appID).toggleClass("slds-hidden");
+    $("#appName_input_wrapper_" + appID).toggleClass("slds-hidden");
     $("#appDesc_label_" + appID).toggleClass("slds-hidden");
-    $("#appDesc_input_" + appID).toggleClass("slds-hidden");
+    $("#appDesc_input_wrapper_" + appID).toggleClass("slds-hidden");
     if($("#appIcon_" + appID).find("use").attr("href").includes("edit"))
       $("#appIcon_" + appID).find("use").attr("href", "/assets/icons/utility-sprite/svg/symbols.svg#save");
     else{
       //Change the Icon and submit the change back to the server
-      $("#appIcon_" + appID).find("use").attr("href", "/assets/icons/utility-sprite/svg/symbols.svg#edit");
-
-      //Post updates back to the server
+      $("#appIcon_" + appID).find("use").attr("href", "/assets/icons/utility-sprite/svg/symbols.svg#edit");      
+      let jsData = { 
+        "id" : appID, 
+        "name" : $("#appName_" + appID).val(), 
+        "description" : $("#appDescription_" + appID).val()       
+      }
+      
+      $.ajax({
+        url: "/app/update",
+        type: "POST",
+        data: jsData,
+        dataType:'json',
+        success: function (response) {
+            console.log(response);
+        },
+        error: function(error){
+            console.log("Something went wrong", error);
+        }
+      });
     }
       
     

@@ -54,3 +54,28 @@ exports.findOne = (appName) => {
     };
   });
 };
+
+// Update a Tutorial by the id in the request
+exports.update = (req, res) => {
+  const id = req.body.id;
+  
+  JBApp.update(req.body, {
+      where: { id: id }
+    })
+      .then(num => {
+        if (num == 1) {
+          res.send({
+            message: "Course was updated successfully."
+          });
+        } else {
+          res.send({
+            message: `Cannot update Course with id=${id}. Maybe Course was not found or req.body is empty!`
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error updating Course with id=" + id
+        });
+      });
+};

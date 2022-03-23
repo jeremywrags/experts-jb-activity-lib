@@ -113,6 +113,13 @@ router.get('/icon/:appName', function(req, res, next) {
   });  
 });
 
+router.post('/app/update', function(req, res, next) {
+  let jbAppPromose =  jbAppController.update(req, res);
+  Promise.all([jbAppPromose]).then(([jbApp]) => {    
+    res.json(jbApp);
+  });  
+});
+
 router.post('/image/uploadfile', upload.single('myFile'), (req, res, next) => {
    
   let jbApp = {
