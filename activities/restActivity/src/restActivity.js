@@ -91,7 +91,7 @@ define(["postmonger"], function (Postmonger) {
     }
     function updateJsonBody(jsonBody){
         document.getElementById("jsonBody").innerHTML = jsonBody;
-        for(var key in JSON.parse(jsonBody).JourneyBuilderSchema){
+        for(var key in JSON.parse(jsonBody)){
             activity.schema.arguments.execute.outArguments[0][key] = { "dataType": "TEXT", "direction": "out","access": "visible"}
         }        
     }
@@ -118,7 +118,7 @@ define(["postmonger"], function (Postmonger) {
     
         //Empty the out schema so that when changes are made the removed items do not remain part of the Activity
         activity.schema.arguments.execute.outArguments[0] = {};
-        for(var key in JSON.parse(jsonBody)){
+        for(var key in JSON.parse(jsonBody).JourneyBuilderSchema){
             activity.schema.arguments.execute.outArguments[0][key] = { "dataType": "TEXT", "direction": "out","access": "visible"}
         }  
 
