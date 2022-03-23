@@ -112,7 +112,7 @@ router.post('/restActivity/:activityName/execute', function (req, res) {
       'headers': {
         'Content-Type': 'application/json'
       },
-      body: epArgs
+      body: JSON.stringify(epArgs)
     };
 
     request(options, function (error, response) {
