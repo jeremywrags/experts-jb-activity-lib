@@ -70,6 +70,11 @@ $(document).ready(function() {
       return false;
   });  
 
+  $(document).on("click", ".accordionAction", function(){   
+    alert("asdfa") 
+    $(this).parent().toggleClass("slds-is-open");    
+  });  
+
   $(document).on("click", ".deleteIcon", function(){
     let appID = $(this).attr("id").split("_")[1];
     let jsData = { 
