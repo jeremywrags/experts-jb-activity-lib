@@ -88,21 +88,21 @@ router.post('/restActivity/:activityName/validate', function (req, res) {
 
 //This is the route that gets called when journey builder executes an activity for the injected contact.
 router.post('/restActivity/:activityName/execute', function (req, res) {
-  console.log("---------------This is the JB Activity execute Route----------------");
-  console.log("req.body", JSON.stringify(req.body)); 
-  console.log("---------------End JB Activity execute Route----------------");
+  console.log("---------------Enter JB Activity execute Route----------------");
+  console.log("req.body", req.body);   
   
-  
-
   try{            
   
     let url =     getInArgument(req.body,"endpointURL");
     let method =  getInArgument(req.body,"httpVerb");
     let ck = getContactKey(req.body);
+
     //the Body will contain 2 elements the Schema that will be returned to JB and the poperties to send
     //to the endpoint. We DO NOT need to send the schema to the endpoint so we will extract the EndpointArguments
-    let jsonBody = getInArgument(req.body,"jsonBody").EndpointArguments;    
-    
+    let jsonBody = getInArgument(req.body,"jsonBody");    
+    let epArgs = JSON.parse(jsonBody.EndpointArguments);
+    console.log("jsobBody             --------" + jsonBody)
+    console.log("endpointArgs         --------" + epArgs);
 
     var options = {
       'method': method ,
@@ -110,7 +110,7 @@ router.post('/restActivity/:activityName/execute', function (req, res) {
       'headers': {
         'Content-Type': 'application/json'
       },
-      body: jsonBody
+      body: epArgs
     };
 
     request(options, function (error, response) {
