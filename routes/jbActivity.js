@@ -104,7 +104,7 @@ router.post('/restActivity/:activityName/execute', function (req, res) {
     console.log("--------------- JSON Body ----------------");
     console.log(jsonBody)
     console.log("--------------- Endpoint Args ----------------");
-    console.log(JOSN.stringify(epArgs));
+    console.log(JSON.stringify(epArgs));
 
     var options = {
       'method': method ,
