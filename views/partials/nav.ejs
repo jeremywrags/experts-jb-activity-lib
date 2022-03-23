@@ -1,7 +1,6 @@
 <div class="slds-context-bar">
   <div class="slds-context-bar__primary">
-    <div
-      class="slds-context-bar__item slds-context-bar__dropdown-trigger slds-dropdown-trigger slds-dropdown-trigger_click slds-no-hover">
+    <div class="slds-context-bar__item slds-context-bar__dropdown-trigger slds-dropdown-trigger slds-dropdown-trigger_click slds-no-hover">
       <div class="slds-context-bar__icon-action">
         <button class="slds-button slds-icon-waffle_container slds-context-bar__button"
           title="Description of the icon when needed">
@@ -35,15 +34,18 @@
         </a>
       </li>
       <% for(var i=0; i < navItems.length; i++){%>
-        <li class="dduMenuWrapper slds-context-bar__item slds-context-bar__dropdown-trigger slds-dropdown-trigger slds-dropdown-trigger_click">
+        <li
+          class="dduMenuWrapper slds-context-bar__item slds-context-bar__dropdown-trigger slds-dropdown-trigger slds-dropdown-trigger_click">
           <a href="#" class="slds-context-bar__label-action" title="Menu Item">
-            <span class="slds-truncate" title="<%= navItems[i].text %>"><%= navItems[i].text %></span>
+            <span class="slds-truncate" title="<%= navItems[i].text %>">
+              <%= navItems[i].text %>
+            </span>
           </a>
           <div class="dduNavHeader slds-context-bar__icon-action slds-p-left_none">
             <button class="slds-button slds-button_icon slds-button_icon slds-context-bar__button" aria-haspopup="true"
               title="Open <%= navItems[i].text %> submenu">
               <svg class="slds-button__icon" aria-hidden="true">
-                <use xlink:href="/slds/assets/icons/utility-sprite/svg/symbols.svg#chevrondown"></use>
+                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chevrondown"></use>
               </svg>
               <span class="slds-assistive-text">Open <%= navItems[i].text %> submenu</span>
             </button>
@@ -62,14 +64,14 @@
             </ul>
           </div>
         </li>
-      <% } %>      
+        <% } %>
     </ul>
   </nav>
   <!-- User Icon & Count -->
   <span class="slds-icon_container slds-icon-utility-announcement">
     <svg class="slds-icon slds-icon-text-success slds-icon_small slds-m-top_xx-small slds-m-right_small"
       aria-hidden="true">
-      <use xlink:href="/slds/assets/icons/utility-sprite/svg/symbols.svg#user"></use>
+      <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#user"></use>
     </svg>
   </span>
 

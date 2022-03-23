@@ -34,16 +34,29 @@ function triggerEmail() {
  })
    
  
+ function readURL(input) {   
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
 
+    reader.onload = function (e) {
+      $('#blah').attr('src', e.target.result).width(150).height(150);
+      $('#blah').css("display", "")
+    };
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
 
 $(document).ready(function() {
   $(document).on("click", "#waffleMenuButton", function(){
     $("#AppLauncher").toggleClass("slds-fade-in-open");
     $("#AppLauncher").next().toggleClass("slds-backdrop_open");
+    $("#AppLauncherSection").toggleClass("slds-is-open")
   });
   $(document).on("click", "#AppLauncherModalCloseButton", function(){
     $("#AppLauncher").toggleClass("slds-fade-in-open");
     $("#AppLauncher").next().toggleClass("slds-backdrop_open");
+    $("#AppLauncherSection").toggleClass("slds-is-open")
   });
 
   $(document).on("mouseenter", ".dduMenuWrapper", function(evt){
@@ -57,8 +70,37 @@ $(document).ready(function() {
       return false;
   });  
 
+  $(document).on("click", ".deleteIcon", function(){
+    let appID = $(this).attr("id").split("_")[1];
+    let jsData = { 
+      "id" : appID    
+    }
+    
+    $.ajax({
+      url: "/app/delete",
+      type: "POST",
+      data: jsData,
+      dataType:'json',
+      success: function (response) {
+          console.log(response);
+          if(response.status){
+            location.reload();
+          }
+      },
+      error: function(error){
+          console.log("Something went wrong", error);
+      }
+    });
+
+  });
+
   $(document).on("click", ".editIcon", function(){
     let appID = $(this).attr("id").split("_")[1];
+    let appName =  $("#appName_" + appID).val();
+    let appDescription =  $("#appDescription_" + appID).val();
+    let oldAppName = $("#appName_label_" + appID).text();
+    let endPointUrl = $("#endpointURL_" + appID).text();
+
     $("#appName_label_" + appID).toggleClass("slds-hidden");
     $("#appName_input_wrapper_" + appID).toggleClass("slds-hidden");
     $("#appDesc_label_" + appID).toggleClass("slds-hidden");
@@ -68,10 +110,11 @@ $(document).ready(function() {
     else{
       //Change the Icon and submit the change back to the server
       $("#appIcon_" + appID).find("use").attr("href", "/assets/icons/utility-sprite/svg/symbols.svg#edit");      
+      
       let jsData = { 
         "id" : appID, 
-        "name" : $("#appName_" + appID).val(), 
-        "description" : $("#appDescription_" + appID).val()       
+        "name" : appName, 
+        "description" : appDescription       
       }
       
       $.ajax({
@@ -81,6 +124,11 @@ $(document).ready(function() {
         dataType:'json',
         success: function (response) {
             console.log(response);
+            if(response.status){
+              $("#appName_label_" + appID).text(appName);
+              $("#appDescription_label_" + appID).text(appDescription);
+              $("#endpointURL_" + appID).text(endPointUrl.replace(oldAppName, appName))
+            }
         },
         error: function(error){
             console.log("Something went wrong", error);

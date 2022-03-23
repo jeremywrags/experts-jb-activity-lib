@@ -56,15 +56,26 @@
                                     
                                 </td>
                                 <td data-label="Prospecting">
-                                    <div class="slds-truncate" title="Prospecting">https://experts-jb-activity-lib.herokuapp.com/jbActivity/restActivity/<%= jbApps[i].name %></div>
+                                    <div class="slds-truncate" title="Prospecting">
+                                        <span id="endpointURL_<%= jbApps[i].id %>" >https://experts-jb-activity-lib.herokuapp.com/jbActivity/restActivity/<%= jbApps[i].name %></span>
+                                    </div>
                                 </td>              
                                 <td>
                                     <span id="app_<%= jbApps[i].id %>" class="slds-icon_container slds-icon-utility-save editIcon" title="Description of icon when needed">
-                                        <svg id="appIcon_<%= jbApps[i].id %>" class="slds-icon slds-icon-text-default" aria-hidden="true">
+                                        <svg id="appIcon_<%= jbApps[i].id %>" class="slds-icon slds-icon_xx-small slds-icon-text-default" aria-hidden="true">
                                           <use href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use>
                                         </svg>
-                                        <span class="slds-assistive-text">Description of icon when needed</span>
+                                        <span class="slds-assistive-text">Description of icon when needed</span>                                        
                                       </span>
+                                      <span id="app_<%= jbApps[i].id %>" class="slds-icon_container slds-icon-utility-save deleteIcon" title="Description of icon when needed">
+                                      <svg id="appIcon_delete_<%= jbApps[i].id %>" class="slds-icon slds-icon_xx-small slds-icon-text-default" aria-hidden="true">
+                                        <use href="/assets/icons/utility-sprite/svg/symbols.svg#delete"></use>
+                                      </svg>
+                                      <span class="slds-assistive-text">Description of icon when needed</span>
+                                      </span>
+
+
+
                                 </td>              
                             </tr>  
                         <%}%>                      

@@ -114,10 +114,11 @@ router.get('/icon/:appName', function(req, res, next) {
 });
 
 router.post('/app/update', function(req, res, next) {
-  let jbAppPromose =  jbAppController.update(req, res);
-  Promise.all([jbAppPromose]).then(([jbApp]) => {    
-    res.json(jbApp);
-  });  
+  jbAppController.update(req, res);
+});
+
+router.post('/app/delete', function(req, res, next) {
+  jbAppController.delete(req, res);  
 });
 
 router.post('/image/uploadfile', upload.single('myFile'), (req, res, next) => {
@@ -131,9 +132,9 @@ router.post('/image/uploadfile', upload.single('myFile'), (req, res, next) => {
     createdBy: req.signedCookies.tsUser
   }
  
-    console.log(jbAppController.create(jbApp))
-    res.redirect('/');  
-})
+    console.log(jbAppController.create(req, res))
+    //res.redirect(req.get('referer'));
+  })
 
 
 

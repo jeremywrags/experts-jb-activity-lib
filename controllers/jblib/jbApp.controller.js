@@ -2,8 +2,35 @@ const db = require("../../models");
 const JBApp = db.jblib.jbApps;
 const Op = db.jblib.Sequelize.Op;
 
+
+exports.create = (req, res) => {
+
+  let jbApp = {
+    name: req.body.appName,    
+    description: req.body.description,    
+    imageType: req.file.mimetype, 
+    imageName: req.file.originalname,
+    imageData: req.file.buffer,
+    createdBy: req.signedCookies.tsUser
+  };
+
+  // Save Tutorial in the database
+  JBApp.create(jbApp)
+    .then(data => {
+      res.redirect("/");
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the Tutorial."
+      });
+    });
+};
+
+
+
 // Create and Save a new WaffleItem
-exports.create = (jbApp) => {
+exports.create2 = (jbApp) => {
 
   // Save Tutorial in the database
   JBApp.create(jbApp).then(data => {
@@ -65,17 +92,46 @@ exports.update = (req, res) => {
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "Course was updated successfully."
+            status : true, 
+            message : "JB App Updated successfully"
           });
         } else {
           res.send({
-            message: `Cannot update Course with id=${id}. Maybe Course was not found or req.body is empty!`
+            status : false,
+            message: `Unable to update JBApp with id=${id}. Maybe JBApp was not found or req.body is empty!`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error updating Course with id=" + id
+          status : false,
+          message: "Error updating JBApp with id=" + id
         });
       });
+};
+
+
+exports.delete = (req, res) => {
+  const id = req.body.id;
+  JBApp.destroy({
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          status : true, 
+            message : "JB App deleted successfully"
+        });
+      } else {
+        res.send({
+          status : false,
+            message: `Unable to delete JBApp with id=${id}. Maybe JBApp was not found or req.body is empty!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete JB App with id=" + id
+      });
+    });
 };
