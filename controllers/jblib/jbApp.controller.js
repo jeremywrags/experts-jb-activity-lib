@@ -7,6 +7,7 @@ exports.create = (req, res) => {
 
   let jbApp = {
     name: req.body.appName,    
+    key: req.body.appName.replace(/ /g, '_'),
     description: req.body.description,    
     imageType: req.file.mimetype, 
     imageName: req.file.originalname,
@@ -70,7 +71,7 @@ exports.findAll2 = (owner) => {
 
   // Find a single Tutorial with an id
 exports.findOne = (appName) => {
-  return JBApp.findOne({ where : { name : appName}})
+  return JBApp.findOne({ where : { key : appName}})
   .then(data => {
     return data;
   })

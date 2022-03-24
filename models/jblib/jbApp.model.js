@@ -3,6 +3,9 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
     },
+    key: {
+      type: DataTypes.STRING,
+    },
     createdBy: {
       type: DataTypes.STRING,
     },
