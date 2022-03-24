@@ -6,7 +6,8 @@ module.exports = function configJSON(req) {
         //icon: `images/icon.png`,
         icon: `/icon/${req.params.activityName}`,
         category: 'custom',
-        configOnDrop: true
+        configOnDrop: true, 
+        activityName: `${req.params.activityName}`
       },
       // For Custom Activity this must say, "REST"
       type: 'REST',
