@@ -27,7 +27,7 @@ define(["postmonger"], function (Postmonger) {
         activity = payload;
 
         //set activity Name in the hidden HTML variable
-        document.getElementById("activityKey").value(activity.key)
+        document.getElementById("activityKey").value = activity.key;
 
         const hasInArguments = Boolean(
             activity.arguments &&
