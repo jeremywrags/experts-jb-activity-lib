@@ -122,6 +122,9 @@ define(["postmonger"], function (Postmonger) {
 
         for(var key in newSchema){
             activity.schema.arguments.execute.outArguments[0][key] = { "dataType": "TEXT", "direction": "out","access": "visible"}
+            document.getElementById("dbProperties")
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode("{{" + activity.key + ".Interactions." + key + "}}"));
         }  
 
         // you can set the name that appears below the activity with the name property
