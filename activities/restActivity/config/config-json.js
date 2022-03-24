@@ -7,7 +7,7 @@ module.exports = function configJSON(req) {
         icon: `/icon/${req.params.activityName}`,
         category: 'custom',
         configOnDrop: true, 
-        activityName: `${req.params.activityName}`
+        activityName: `${req.params.activityName.replace(/_/g, ' ')}`
       },
       // For Custom Activity this must say, "REST"
       type: 'REST',

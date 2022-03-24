@@ -105,9 +105,9 @@ router.get('/', authCheck, function(req, res, next) {
   });  
 });
 
-router.get('/icon/:appName', function(req, res, next) {
+router.get('/icon/:appKey', function(req, res, next) {
   
-  let jbAppPromose =  jbAppController.findOne(req.params.appName);
+  let jbAppPromose =  jbAppController.findOne(req.params.appKey);
   Promise.all([jbAppPromose]).then(([jbApp]) => {    
     res.send(Buffer.from(jbApp.imageData.toString('base64'), "base64"));
   });  
