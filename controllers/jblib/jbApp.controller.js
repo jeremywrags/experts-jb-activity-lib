@@ -84,6 +84,25 @@ exports.findOne = (key) => {
   });
 };
 
+// Find a single Tutorial with an id
+exports.findOne2 = (req, res) => {
+  const key = req.params.appKey
+  console.log(key)
+  JBApp.findOne({ where : { key : key}})
+    .then(jbApp => {
+      if (jbApp) {
+        res.send(Buffer.from(jbApp.imageData.toString('base64'), "base64"));
+      } else {
+        res.sendFile('icon.svg', { root: `public/images/`});
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error retrieving Tutorial with id=" + id
+      });
+    });
+};
+
 // Update a Tutorial by the id in the request
 exports.update = (req, res) => {
   const id = req.body.id;

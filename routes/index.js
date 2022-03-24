@@ -105,12 +105,16 @@ router.get('/', authCheck, function(req, res, next) {
   });  
 });
 
-router.get('/icon/:appKey', function(req, res, next) {
+router.get('/icon2/:appKey', function(req, res, next) {
   
   let jbAppPromose =  jbAppController.findOne(req.params.appKey);
   Promise.all([jbAppPromose]).then(([jbApp]) => {    
     res.send(Buffer.from(jbApp.imageData.toString('base64'), "base64"));
   });  
+});
+
+router.get('/icon/:appKey', function(req, res, next) {
+  jbAppController.findOne2(req, res);
 });
 
 router.post('/app/update', function(req, res, next) {
