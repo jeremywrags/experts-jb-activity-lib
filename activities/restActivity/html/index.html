@@ -31,7 +31,15 @@
         $(document).ready(function () {
             $(document).on("blur", "#jsonBody", function () {
                 try {
-                    JSON.parse($(this).val());
+                    let jsBody = JSON.parse($(this).val());
+                    let activityKey = $("#activityKey").val();
+                    $("#dbProperties").empty();
+                    
+                    let newSchema = jsBody.JourneyBuilderSchema
+                    for(var key in newSchema){
+                        $("#dbProperties").append("<li>{{" + activityKey + ".Interactions." + key + "}}</li>");
+                    }    
+
                 } catch (e) {
                     alert(e)
                     return false;
@@ -47,7 +55,7 @@
 </head>
 
 <body>
-    <input type="hidden" value=`${req.params.activityName}`>
+    <input type="hidden" id="activityKey" value="default">
     <article class="slds-card">
         <div class="slds-card__header slds-grid">
             <header class="slds-media slds-media_center slds-has-flexi-truncate">
