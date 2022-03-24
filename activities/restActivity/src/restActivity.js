@@ -125,7 +125,7 @@ define(["postmonger"], function (Postmonger) {
         }  
 
         // you can set the name that appears below the activity with the name property
-        activity.name = activity.name + "(" + activity.key + ")"       
+        activity.name = activity.metaData.activityName + " (" + activity.key + ")"       
 
     
         console.log('------------ triggering:updateActivity({obj}) ----------------');
