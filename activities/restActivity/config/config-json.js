@@ -13,7 +13,7 @@ module.exports = function configJSON(req) {
       type: 'REST',
       lang: {
         'en-US': {
-          name: `${req.params.activityName.replace(/_/g, ' ')}}`,
+          name: `${req.params.activityName.replace(/_/g, ' ')}`,
           description: `Make a request to the ${req.params.activityName} Rest API`
         }
       },
