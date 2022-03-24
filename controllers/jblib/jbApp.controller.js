@@ -70,8 +70,9 @@ exports.findAll2 = (owner) => {
   };
 
   // Find a single Tutorial with an id
-exports.findOne = (appName) => {
-  return JBApp.findOne({ where : { key : appName}})
+exports.findOne = (key) => {
+  //use the appname as the 
+  return JBApp.findOne({ where : { key : key}})
   .then(data => {
     return data;
   })
