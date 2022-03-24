@@ -89,11 +89,18 @@ define(["postmonger"], function (Postmonger) {
         document.getElementById("endpointURL").value = endpointURL;
 
     }
-    function updateJsonBody(jsonBody){
+    function updateJsonBody(jsonBody){        
         document.getElementById("jsonBody").innerHTML = jsonBody;
-        //for(var key in JSON.parse(jsonBody)){
-        //    activity.schema.arguments.execute.outArguments[0][key] = { "dataType": "TEXT", "direction": "out","access": "visible"}
-        //}        
+
+        let newSchema = JSON.parse(jsonBody).JourneyBuilderSchema
+        for(var key in newSchema){
+            activity.schema.arguments.execute.outArguments[0][key] = { "dataType": "TEXT", "direction": "out","access": "visible"}
+            
+            var ul = document.getElementById("dbProperties");
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode("{{" + activity.key + ".Interactions." + key + "}}"));
+            ul.appendChild(li);                        
+        }       
     }
 
     function onDoneButtonClick() {
@@ -121,10 +128,7 @@ define(["postmonger"], function (Postmonger) {
         let newSchema = JSON.parse(jsonBody).JourneyBuilderSchema
 
         for(var key in newSchema){
-            activity.schema.arguments.execute.outArguments[0][key] = { "dataType": "TEXT", "direction": "out","access": "visible"}
-            document.getElementById("dbProperties")
-            var li = document.createElement("li");
-            li.appendChild(document.createTextNode("{{" + activity.key + ".Interactions." + key + "}}"));
+            activity.schema.arguments.execute.outArguments[0][key] = { "dataType": "TEXT", "direction": "out","access": "visible"}            
         }  
 
         // you can set the name that appears below the activity with the name property
