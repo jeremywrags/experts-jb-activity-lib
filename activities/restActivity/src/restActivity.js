@@ -125,14 +125,14 @@ define(["postmonger"], function (Postmonger) {
         }  
 
         // you can set the name that appears below the activity with the name property
-        //activity.name = `Rest API`;       
+        activity.name = activity.name + "<br>(" + activity.key + ")"       
 
     
         console.log('------------ triggering:updateActivity({obj}) ----------------');
         console.log('Sending message back to updateActivity');
         console.log('saving\n', JSON.stringify(activity, null, 4));
         console.log('--------------------------------------------------------------');
-    
+        
         connection.trigger('updateActivity', activity);
     }
 
