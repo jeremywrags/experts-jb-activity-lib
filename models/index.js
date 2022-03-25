@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 const sequelize_baseline = new Sequelize(process.env.DATABASE_URL_BASELINE + "?sslmode=no-verify", { })
-const sequelize_jblib =  new Sequelize(process.env.DATABASE_URL_JBLIB + "?sslmode=no-verify", { })
+const sequelize_jblib =  new Sequelize(process.env.DATABASE_URL + "?sslmode=no-verify", { })
 const db = {};
 
 //Baseline Objects
