@@ -58,6 +58,7 @@ exports.findAll = (req, res) => {
 // Find a singl
 exports.findAll2 = (owner) => {        
   return JBApp.findAll({ where : { createdBy : owner}})
+  //return JBApp.findAll()
     .then(data => {
       return data;
     })
