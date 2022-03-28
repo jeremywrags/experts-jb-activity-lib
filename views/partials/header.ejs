@@ -6,16 +6,15 @@
 <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<!-- Define app name for GA Tracking 
+<!-- Define app name for GA Tracking -->
   <script>
-    var expertsUrl = '/projects/apps/your-new-app-name';
+    var expertsUrl = '/projects/apps/jb-activity-library';
 </script>
--->
 
-<!-- Global site tag (gtag.js) - Google Analytics 
+<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114173005-2"></script>
 <script>
-//  expertsUrl += window.location.hostname;
+  expertsUrl += window.location.hostname;
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -23,4 +22,3 @@
     'page_path': expertsUrl
   });
 </script>
--->
