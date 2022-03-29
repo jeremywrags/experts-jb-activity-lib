@@ -106,6 +106,9 @@ router.post('/restActivity/:activityName/execute', function (req, res) {
     console.log("--------------- Endpoint Args ----------------");
     console.log(JSON.stringify(epArgs));
 
+    console.log("--------------- ContactKey for call ----------------");
+    console.log(JSON.stringify(ck));
+
     var options = {
       'method': method ,
       'url': url,
