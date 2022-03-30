@@ -26,7 +26,7 @@ module.exports = function configJSON(req) {
             {
               jsonBody: `{ 
                 "EndpointArguments": {
-                     "customerID" : "{{Contact.Key}}" , 
+                     "customerID" : "ABC123" , 
                      "property1key" : "property1Value" 
                 },
                 "JourneyBuilderSchema": {

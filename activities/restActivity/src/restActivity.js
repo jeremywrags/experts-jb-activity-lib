@@ -3,7 +3,7 @@ define(["postmonger"], function (Postmonger) {
 
     var connection = new Postmonger.Session();
     let activity = null;
-
+    let contactKey = ""
 
     $(window).ready(onRender);
 
@@ -55,6 +55,7 @@ define(["postmonger"], function (Postmonger) {
         if(hasInArguments){
             document.getElementById("endpointURL").value = inArguments[0].endpointURL;
             document.getElementById("endpointURL").value = inArguments[0].jsonBody;
+            contactKey = inArguments[0].contactIdentifier
         }
 
         if(hasOutArguments){
