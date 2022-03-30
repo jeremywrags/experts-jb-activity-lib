@@ -30,8 +30,8 @@ module.exports = function configJSON(req) {
                      "property1key" : "property1Value" 
                 },
                 "JourneyBuilderSchema": {
-                   "responeKey1" : "responseValue1", 
-                   "responeKey2" : "responseValue2"                   
+                   "responeKey1" : "BOOLEAN", 
+                   "responeKey2" : "TEXT"                   
                 }
             }`
             },
