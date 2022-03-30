@@ -98,7 +98,7 @@ define(["postmonger"], function (Postmonger) {
 
         let newSchema = JSON.parse(jsonBody).JourneyBuilderSchema
         for(var key in newSchema){
-            activity.schema.arguments.execute.outArguments[0][key] = { "dataType": "TEXT", "direction": "out","access": "visible"}
+            activity.schema.arguments.execute.outArguments[0][key] = {  "dataType": newSchema[key], "direction": "out","access": "visible"}
             
             var ul = document.getElementById("dbProperties");
             var li = document.createElement("li");
@@ -132,7 +132,7 @@ define(["postmonger"], function (Postmonger) {
         let newSchema = JSON.parse(jsonBody).JourneyBuilderSchema
 
         for(var key in newSchema){
-            activity.schema.arguments.execute.outArguments[0][key] = { "dataType": "TEXT", "direction": "out","access": "visible"}            
+            activity.schema.arguments.execute.outArguments[0][key] = { "dataType": newSchema[key], "direction": "out","access": "visible"}            
         }  
 
         // you can set the name that appears below the activity with the name property
