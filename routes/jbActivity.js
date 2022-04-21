@@ -103,7 +103,7 @@ router.post('/restActivity/:activityName/execute', function (req, res) {
     let jsonBody = getInArgument(req.body,"jsonBody");   
     
     try{
-      jsonBody = jsonBody.replace("{{Contact.Key}}", ck)
+      jsonBody = jsonBody.replace("{{ContactKey}}", ck)
       jsonBody = jsonBody.replace("{{FisrtName}}", firstName)
     }catch(err){
       console.log("Error replacing the Contact key in the JSON Body" + err)
