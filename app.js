@@ -40,6 +40,7 @@ var port = process.env.PORT || 3000;
 var indexRouter = require('./routes/index');
 var triggerEmailRouter = require('./routes/triggerEmail');
 var activityRouter = require('./routes/jbActivity');
+var inAppActivityRouter = require('./routes/inAppMessageActivity');
 var apiRouter = require('./routes/api');
 var authRouter = require("./routes/auth.routes")
 
@@ -62,6 +63,7 @@ app.use(express.static(__dirname + '/node_modules/jquery/dist'));
 app.use('/', indexRouter);
 app.use('/triggerEmail', triggerEmailRouter);
 app.use('/jbActivity', activityRouter);
+app.use('/inAppMessage', inAppActivityRouter);
 app.use('/api', apiRouter);
 app.use('/auth', authRouter);
 

@@ -12,9 +12,16 @@ router.get('/', function(req, res, next) {
 
 /* GET users listing. */
 router.post('/', function(req, res, next) {
+
   console.log("---------------This is the API POST Route----------------");
   console.log(req.body);
   console.log("---------------End API POST Route----------------");
+  
+  let aArgs = req.body.AuthArgs == null ? null : req.body.AuthArgs;
+
+  if(req.body.AuthArgs)
+    aArgs = req.body.AuthArgs;
+
 
   return res.status(200).json(req.body);
 });
