@@ -20,7 +20,10 @@ router.post('/', function(req, res, next) {
   let aArgs = req.body.AuthArgs == null ? null : req.body.AuthArgs;
 
   if(req.body.AuthArgs)
+  {
     aArgs = req.body.AuthArgs;
+    console.log("This API uses auth, here are the args->" + aArgs)
+  }
 
 
   return res.status(200).json(req.body);
