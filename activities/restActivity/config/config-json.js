@@ -24,6 +24,9 @@ module.exports = function configJSON(req) {
               contactIdentifier: "{{Contact.Key}}"
             },
             {
+              fisrtName: '{{Contact.Default."Email Data"."Email Demographics"."First Name"}}'
+            },
+            {
               jsonBody: `{ 
                 "EndpointArguments": {
                      "customerID" : "ABC123" , 

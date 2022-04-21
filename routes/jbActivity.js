@@ -95,6 +95,7 @@ router.post('/restActivity/:activityName/execute', function (req, res) {
   
     let url =     getInArgument(req.body,"endpointURL");
     let method =  getInArgument(req.body,"httpVerb");
+    let firstName =  getInArgument(req.body,"fisrtName");
     let ck = getContactKey(req.body);
 
     //the Body will contain 2 elements the Schema that will be returned to JB and the poperties to send
@@ -103,6 +104,7 @@ router.post('/restActivity/:activityName/execute', function (req, res) {
     
     try{
       jsonBody = jsonBody.replace("{{Contact.Key}}", ck)
+      jsonBody = jsonBody.replace("{{FisrtName}}", firstName)
     }catch(err){
       console.log("Error replacing the Contact key in the JSON Body" + err)
     }
