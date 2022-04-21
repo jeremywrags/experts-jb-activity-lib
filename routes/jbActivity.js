@@ -129,6 +129,8 @@ router.post('/restActivity/:activityName/execute', function (req, res) {
       console.log(response.body);      
       console.log("---------------End Raw response body from the API----------------");
       try{
+        if(response.body.length == 0)
+          response.body = '{"status" : "success"}'
         responseObject =  JSON.parse(response.body);
       }catch(err){
         console.log("Error occured parsing JSON " + err)
