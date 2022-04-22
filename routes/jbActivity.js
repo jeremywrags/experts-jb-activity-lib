@@ -89,10 +89,12 @@ router.post('/restActivity/:activityName/validate', function (req, res) {
 //This is the route that gets called when journey builder executes an activity for the injected contact.
 router.post('/restActivity/:activityName/execute', function (req, res) {
   console.log("---------------Enter JB Activity execute Route----------------");
-  console.log("req.body", req.body);   
+  console.log("Raw req.body");   
+  console.log(req.body);   
   
   try{            
   
+    
     let url =     getInArgument(req.body,"endpointURL");
     let method =  getInArgument(req.body,"httpVerb");
     let firstName =  getInArgument(req.body,"fisrtName");
