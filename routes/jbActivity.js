@@ -1,10 +1,12 @@
 var express = require('express');
 const path = require('path');
 var fs = require('fs');
+const axios = require('axios').default;
 
 const configJSON = require('../activities/restActivity/config/config-json');
 var request = require('request');
 const { json } = require('express/lib/response');
+const { promiseImpl } = require('ejs');
 
 
 var router = express.Router();
@@ -111,6 +113,7 @@ router.post('/restActivity/:activityName/execute', function (req, res) {
     console.log(authBody)
     console.log("--------------- Endpoint Args ----------------");
     console.log(JSON.stringify(epArgs));
+  
     
     var options = {
       'method': httpVerb ,
@@ -120,6 +123,9 @@ router.post('/restActivity/:activityName/execute', function (req, res) {
       },
       body: JSON.stringify(epArgs)
     };
+
+    if(authBody)
+      getAuth(options, authBody)
 
     request(options, function (error, response) {
       let responseObject = "";
@@ -166,51 +172,23 @@ function getContactKey(req) {
   }
 }
 
-function getAuth(authArgs){
-  switch(authArgs.Type){
-    case "basic":
-      try{
-        let buff = new Buffer.from(authArgs.username + ":" + authArgs.password);
-        let base64data = buff.toString('base64')
-        console.log("Basic Auth: " + base64data);
-      }catch(err){
-        console.log("Basic Auth Error: " + base64data);
-      }
-      break;
-    case "bearer":
-      console.log("Bearer Auth");
-      break;
-    case "apiKey":
-      console.log("API Key");
-      break;
-    case "oauth":
-      console.log("oAuth");
-      console.log("*************---------------------******************", typeof authArgs)
-      try{
-        var options = {
-          'method': authArgs.httpVerb,
-          'url': authArgs.authEndpoint,
-          'headers': {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(authArgs)
-        
-        };
-        request(options, function (error, response) {
-          if (error) throw new Error(error);
-          let resp =  JSON.parse(response.body);
-          console.log("Access Token: " + resp["access_token"]);
-          return  resp;
-        });
-      }catch(err){
-        console.log(err)
-      }
-      break;
-    default:
-      return "";
-      console.log("no auth provided");
-  }
- 
+const getAuth = async (options, authBody) => {
+  
+    let authOptions = {
+      "grant_type": "client_credentials",
+      "client_id": "b55wez45bg84y5178nl9s1md",
+      "client_secret": "kRVaT5BaOPZOjodpqVs8ZtiQ"
+    };  
+  
+  try{
+    const resp = await axios.post('https://mcdgh6zb-3v79rzh9lbzr6m-1pxq.auth.marketingcloudapis.com/v2/token', authOptions )
+    console.log("---------------Response Object from Auth----------------");
+    console.log(resp.data);
+    console.log("---------------End Response Object from Auth----------------");
+
+  }catch(err){
+    console.error(err);
+  } 
 }
 
 module.exports = router;
