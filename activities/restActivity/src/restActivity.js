@@ -114,7 +114,7 @@ define(["postmonger"], function (Postmonger) {
         }       
     }
 
-    function updateJsonBody(authBody){        
+    function updateAuthBody(authBody){        
         document.getElementById("authBody").innerHTML = authBody;        
     }
 
