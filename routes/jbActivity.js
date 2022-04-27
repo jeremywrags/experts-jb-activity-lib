@@ -179,11 +179,11 @@ function getContactKey(req) {
 
 const getAuth = async (options) => {
   
-    let options = {
+    /*let options = {
       "grant_type": "client_credentials",
       "client_id": "b55wez45bg84y5178nl9s1md",
       "client_secret": "kRVaT5BaOPZOjodpqVs8ZtiQ"
-    };  
+    };*/  
   
   try{
     //const resp = await axios.post('https://mcdgh6zb-3v79rzh9lbzr6m-1pxq.auth.marketingcloudapis.com/v2/token', authOptions )
