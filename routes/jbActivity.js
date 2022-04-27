@@ -126,7 +126,7 @@ router.post('/restActivity/:activityName/execute', function (req, res) {
 
     
     if(authBody){
-      auth = getAuth(authBody)
+      auth = await getAuth(authBody)
       options.headers["Authorization"] = "Bearer " + auth.access_token;
       console.log("--------------- API Aut Response ----------------");
       console.log(auth)
