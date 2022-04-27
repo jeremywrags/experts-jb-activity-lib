@@ -100,7 +100,7 @@ router.post('/restActivity/:activityName/execute', function (req, res) {
     let url =     getInArgument(req.body,"endpointURL");
     let httpVerb =  getInArgument(req.body,"httpVerb");    
     let ck = getContactKey(req.body);
-
+    let authToken;
     //the Body will contain 2 elements the Schema that will be returned to JB and the poperties to send
     //to the endpoint. We DO NOT need to send the schema to the endpoint so we will extract the EndpointArguments
     let jsonBody = JSON.parse(getInArgument(req.body,"jsonBody"));       
@@ -124,8 +124,13 @@ router.post('/restActivity/:activityName/execute', function (req, res) {
       body: JSON.stringify(epArgs)
     };
 
-    if(authBody)
-      getAuth(options, authBody)
+    
+    if(authBody){
+      auth = getAuth(authBody)
+      options.headers["Authorization"] = "Bearer " + auth.access_token;
+      console.log("--------------- API Call Options ----------------");
+      console.log(options)
+    }
 
     request(options, function (error, response) {
       let responseObject = "";
@@ -172,20 +177,21 @@ function getContactKey(req) {
   }
 }
 
-const getAuth = async (options, authBody) => {
+const getAuth = async (options) => {
   
-    let authOptions = {
+    let options = {
       "grant_type": "client_credentials",
       "client_id": "b55wez45bg84y5178nl9s1md",
       "client_secret": "kRVaT5BaOPZOjodpqVs8ZtiQ"
     };  
   
   try{
-    const resp = await axios.post('https://mcdgh6zb-3v79rzh9lbzr6m-1pxq.auth.marketingcloudapis.com/v2/token', authOptions )
+    //const resp = await axios.post('https://mcdgh6zb-3v79rzh9lbzr6m-1pxq.auth.marketingcloudapis.com/v2/token', authOptions )
+    const resp = await axios.post(options.authURL, options )
     console.log("---------------Response Object from Auth----------------");
     console.log(resp.data);
     console.log("---------------End Response Object from Auth----------------");
-
+    return resp.data;
   }catch(err){
     console.error(err);
   } 
