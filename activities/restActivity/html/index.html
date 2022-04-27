@@ -26,6 +26,7 @@
             var dependencies = ["restActivity"];
             require(config, dependencies);
         })();
+        
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -50,6 +51,23 @@
             $(document).on("click", ".accordionAction", function(){                   
                 $(this).parent().toggleClass("slds-is-open");    
             });  
+
+            //Handle Tab Click
+            $(document.body).on("click", ".slds-tabs_default__link", function () {                
+                var tab = $(this).attr("aria-controls");    
+                
+                //set active tab nav
+                $(".slds-tabs_default__link").attr("aria-selected", "false")
+                $(this).attr("aria-selected", "true")
+                $(".slds-tabs_default__item").removeClass("slds-is-active");
+                $(this).parent().addClass("slds-is-active");
+                //remove show from all tabContainers, then add hide to all containers
+                $(".slds-tabs_default__content").removeClass("slds-show");
+                $(".slds-tabs_default__content").addClass("slds-hide");
+                //now show the specific tab container
+                $("#" + tab).addClass("slds-show")
+                $("#" + tab).removeClass("slds-hide")
+            })
         })
     </script>
 </head>
@@ -86,7 +104,7 @@
             <div class="slds-grid slds-wrap">
                 <div class="slds-col slds-size_1-of-12">
                     <div class="slds-form-element">
-                        <div style="width: 100px;" class="slds-form-element__control">
+                        <div style="width: 70px;" class="slds-form-element__control">
                             <div class="slds-select_container">
                                 <select class="slds-select" id="httpVerb">
                                     <option>POST</option>
@@ -106,12 +124,31 @@
                 </div>
                 
                 <div class="slds-col slds-size_12-of-12">
-                    <div class="slds-form-element">
-                        <label class="slds-form-element__label" for="jsonBody">JSON Body</label>
-                        <div class="slds-form-element__control">
-                            <textarea id="jsonBody" class="textAreaHeight"></textarea>
+                    <div class="slds-tabs_default">
+                        <ul class="slds-tabs_default__nav" role="tablist">
+                          <li class="slds-tabs_default__item slds-is-active" title="API Body" role="presentation">
+                            <a class="slds-tabs_default__link" href="#" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">API Body</a>
+                          </li>
+                          <li class="slds-tabs_default__item" title="Auth" role="presentation">
+                            <a class="slds-tabs_default__link" href="#" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-2" id="tab-default-2__item">Auth</a>
+                          </li>                          
+                        </ul>
+                        <div id="tab-default-1" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item">
+                            <div class="slds-form-element">                                
+                                <div class="slds-form-element__control">
+                                    <textarea id="jsonBody" class="textAreaHeight"></textarea>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                        <div id="tab-default-2" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-2__item">
+                            <div class="slds-form-element">                                
+                                <div class="slds-form-element__control">
+                                    <textarea id="authBody" class="textAreaHeight"></textarea>
+                                </div>
+                            </div>
+                        </div>                        
+                      </div>
+                    
                     <div id="status-container" class="slds-align_absolute-center" style="display:none;">
                         <hr>
                         <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate slds-m-bottom_small"

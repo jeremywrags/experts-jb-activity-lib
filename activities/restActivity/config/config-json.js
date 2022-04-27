@@ -24,7 +24,7 @@ module.exports = function configJSON(req) {
               contactIdentifier: "{{Contact.Key}}"
             },
             {
-              fisrtName: '{{Contact.Default."Email Data"."Email Demographics"."First Name"}}'
+              fisrtName: '{{Contact.Demographics.First_Name}}'
             },
             {
               jsonBody: `{ 
@@ -37,6 +37,13 @@ module.exports = function configJSON(req) {
                    "responeKey2" : "TEXT"                   
                 }
             }`
+            },
+            {
+              authBody: `{
+                "clientID" : "ABC123", 
+                "clientSeceret" : "ABC123", 
+                "AuthEndpoint" : "http://yourAuthEndpoint.com"
+              }`
             },
             {
               endpointURL: "https://experts-jb-activity-lib.herokuapp.com/api"
@@ -85,6 +92,11 @@ module.exports = function configJSON(req) {
                 direction: "in"
               },
               jsonBody: {
+                dataType: 'Text',
+                isNullable: false,
+                direction: "in"
+              },
+              authBody: {
                 dataType: 'Text',
                 isNullable: false,
                 direction: "in"

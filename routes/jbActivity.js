@@ -95,43 +95,27 @@ router.post('/restActivity/:activityName/execute', function (req, res) {
 
   try{            
   
-
     let url =     getInArgument(req.body,"endpointURL");
-    let method =  getInArgument(req.body,"httpVerb");    
+    let httpVerb =  getInArgument(req.body,"httpVerb");    
     let ck = getContactKey(req.body);
 
     //the Body will contain 2 elements the Schema that will be returned to JB and the poperties to send
     //to the endpoint. We DO NOT need to send the schema to the endpoint so we will extract the EndpointArguments
-    let jsonBody = getInArgument(req.body,"jsonBody");   
+    let jsonBody = JSON.parse(getInArgument(req.body,"jsonBody"));   
     
-    console.log("---------------        Replacement String Extraction       ----------------");    
-    try{
-      //define a regex to extract the handlebars matches
-      const regexp = /\{\{(.*?)\}\}/g;
-      const matches = string.matchAll(regexp);
-      for (const match of matches) {
-        console.log("Replacement string found: " + match[0]);        
-      }
-      
-      jsonBody = jsonBody.replace("{{ContactKey}}", ck);    
-
-    }catch(err){
-      console.log("Error replacing the Contact key in the JSON Body" + err)
-    }
-    console.log("---------------     End Replacement String Extraction       ----------------");
-
-
-    let epArgs = JSON.parse(jsonBody).EndpointArguments;
+    let authBody = JSON.parse(getInArgument(req.body,"authBody"));   
+    
+    let epArgs = jsonBody.EndpointArguments;    
+  
     console.log("--------------- JSON Body ----------------");
     console.log(jsonBody)
+    console.log("--------------- auth Body ----------------");
+    console.log(authBody)
     console.log("--------------- Endpoint Args ----------------");
     console.log(JSON.stringify(epArgs));
-
-    console.log("--------------- ContactKey for call ----------------");
-    console.log(JSON.stringify(ck));
-
+    
     var options = {
-      'method': method ,
+      'method': httpVerb ,
       'url': url,
       'headers': {
         'Content-Type': 'application/json'
@@ -140,9 +124,7 @@ router.post('/restActivity/:activityName/execute', function (req, res) {
     };
 
     request(options, function (error, response) {
-
       let responseObject = "";
-
       if (error){
         throw new Error(error);
       } 
@@ -156,14 +138,12 @@ router.post('/restActivity/:activityName/execute', function (req, res) {
       }catch(err){
         console.log("Error occured parsing JSON " + err)
         console.log("Raw Response body " + response.body)
-      }
-      
+      }    
       console.log("---------------Response Object being returned to JB----------------");
       console.log('Response Object:', JSON.stringify(responseObject));
       console.log("---------------End Response Object being returned to JB----------------");
       return res.status(200).json(responseObject);    
-    }); 
-       
+    });        
   }catch(err){
     console.log(err)
     return res.status(200).json({"error" : "something went wrong"}); 
@@ -187,4 +167,52 @@ function getContactKey(req) {
       return req.keyValue;
   }
 }
+
+function getAuth(authArgs){
+  switch(authArgs.Type){
+    case "basic":
+      try{
+        let buff = new Buffer.from(authArgs.username + ":" + authArgs.password);
+        let base64data = buff.toString('base64')
+        console.log("Basic Auth: " + base64data);
+      }catch(err){
+        console.log("Basic Auth Error: " + base64data);
+      }
+      break;
+    case "bearer":
+      console.log("Bearer Auth");
+      break;
+    case "apiKey":
+      console.log("API Key");
+      break;
+    case "oauth":
+      console.log("oAuth");
+      console.log("*************---------------------******************", typeof authArgs)
+      try{
+        var options = {
+          'method': authArgs.httpVerb,
+          'url': authArgs.authEndpoint,
+          'headers': {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(authArgs)
+        
+        };
+        request(options, function (error, response) {
+          if (error) throw new Error(error);
+          let resp =  JSON.parse(response.body);
+          console.log("Access Token: " + resp["access_token"]);
+          return  resp;
+        });
+      }catch(err){
+        console.log(err)
+      }
+      break;
+    default:
+      return "";
+      console.log("no auth provided");
+  }
+ 
+}
+
 module.exports = router;

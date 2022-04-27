@@ -54,7 +54,8 @@ define(["postmonger"], function (Postmonger) {
 
         if(hasInArguments){
             document.getElementById("endpointURL").value = inArguments[0].endpointURL;
-            document.getElementById("endpointURL").value = inArguments[0].jsonBody;
+            document.getElementById("jsonBody").value = inArguments[0].jsonBody;
+            document.getElementById("jsonBody").value = inArguments[0].authBody;            
             contactKey = inArguments[0].contactIdentifier
         }
 
@@ -87,6 +88,12 @@ define(["postmonger"], function (Postmonger) {
             updateJsonBody(jsonBodyArgument.jsonBody);            
         }
 
+        const authBodyArgument = inArguments.find((arg) => arg.authBody);
+        console.log('authBody Argument', authBodyArgument.authBody);
+        if (authBodyArgument) {
+            updateAuthBody(authBodyArgument.jsonBody);            
+        }
+
     }
 
     function updateEndpointURL(endpointURL){
@@ -107,6 +114,10 @@ define(["postmonger"], function (Postmonger) {
         }       
     }
 
+    function updateJsonBody(authBody){        
+        document.getElementById("authBody").innerHTML = authBody;        
+    }
+
     function onDoneButtonClick() {
         // we set must metaData.isConfigured in order to tell JB that
         // this activity is ready for activation
@@ -115,6 +126,7 @@ define(["postmonger"], function (Postmonger) {
         // get the option that the user selected and save it to
         //const eventType = document.getElementById('eventType').value;
         const jsonBody = document.getElementById('jsonBody').value;
+        const authBody = document.getElementById('authBody').value;
         const endpointURL = document.getElementById('endpointURL').value;
         var e = document.getElementById("httpVerb");
         var httpVerb = e.options[e.selectedIndex].text;
@@ -124,6 +136,7 @@ define(["postmonger"], function (Postmonger) {
         activity.arguments.execute.inArguments = [{
             endpointURL: endpointURL,
             jsonBody: jsonBody,
+            authBody: authBody,
             httpVerb: httpVerb            
         }];
     
