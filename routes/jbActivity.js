@@ -193,7 +193,11 @@ const getAuth = async (options) => {
     console.log("---------------Response Object from Auth----------------");
     console.log(resp.data);
     console.log("---------------End Response Object from Auth----------------");
-    return resp.data;
+    if(resp.status === 200){
+      return resp.data;
+    }else{
+      return ""
+    }
   }catch(err){
     console.error(err);
   } 
