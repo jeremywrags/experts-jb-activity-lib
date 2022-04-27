@@ -124,37 +124,61 @@ router.post('/restActivity/:activityName/execute', function (req, res) {
       body: JSON.stringify(epArgs)
     };
 
-    
+    //Do Some Auth
     if(authBody){
-      auth = getAuth(authBody)
-      options.headers["Authorization"] = "Bearer " + auth.access_token;
-      console.log("--------------- API Aut Response ----------------");
-      console.log(auth)
-      console.log("--------------- API Call Options ----------------");
-      console.log(options)
+      auth = getAuth(authBody).then((auth) => {
+        options.headers["Authorization"] = "Bearer " + auth.access_token;
+        console.log("--------------- API Aut Response ----------------");
+        console.log(auth)
+        console.log("--------------- API Call Options ----------------");
+        console.log(options)
+        request(options, function (error, response) {
+          let responseObject = "";
+          if (error){
+            throw new Error(error);
+          } 
+          console.log("---------------Raw response body from the API----------------");
+          console.log(response.body);      
+          console.log("---------------End Raw response body from the API----------------");
+          try{
+            if(response.body.length == 0)
+              response.body = '{"status" : "success"}'
+            responseObject =  JSON.parse(response.body);
+          }catch(err){
+            console.log("Error occured parsing JSON " + err)
+            console.log("Raw Response body " + response.body)
+          }    
+          console.log("---------------Response Object being returned to JB----------------");
+          console.log('Response Object:', JSON.stringify(responseObject));
+          console.log("---------------End Response Object being returned to JB----------------");
+          return res.status(200).json(responseObject);    
+        });  
+      });            
+    }else{
+      request(options, function (error, response) {
+        let responseObject = "";
+        if (error){
+          throw new Error(error);
+        } 
+        console.log("---------------Raw response body from the API----------------");
+        console.log(response.body);      
+        console.log("---------------End Raw response body from the API----------------");
+        try{
+          if(response.body.length == 0)
+            response.body = '{"status" : "success"}'
+          responseObject =  JSON.parse(response.body);
+        }catch(err){
+          console.log("Error occured parsing JSON " + err)
+          console.log("Raw Response body " + response.body)
+        }    
+        console.log("---------------Response Object being returned to JB----------------");
+        console.log('Response Object:', JSON.stringify(responseObject));
+        console.log("---------------End Response Object being returned to JB----------------");
+        return res.status(200).json(responseObject);    
+      });  
     }
 
-    request(options, function (error, response) {
-      let responseObject = "";
-      if (error){
-        throw new Error(error);
-      } 
-      console.log("---------------Raw response body from the API----------------");
-      console.log(response.body);      
-      console.log("---------------End Raw response body from the API----------------");
-      try{
-        if(response.body.length == 0)
-          response.body = '{"status" : "success"}'
-        responseObject =  JSON.parse(response.body);
-      }catch(err){
-        console.log("Error occured parsing JSON " + err)
-        console.log("Raw Response body " + response.body)
-      }    
-      console.log("---------------Response Object being returned to JB----------------");
-      console.log('Response Object:', JSON.stringify(responseObject));
-      console.log("---------------End Response Object being returned to JB----------------");
-      return res.status(200).json(responseObject);    
-    });        
+          
   }catch(err){
     console.log(err)
     return res.status(200).json({"error" : "something went wrong"}); 
