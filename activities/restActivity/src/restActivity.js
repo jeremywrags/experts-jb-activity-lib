@@ -55,7 +55,7 @@ define(["postmonger"], function (Postmonger) {
         if(hasInArguments){
             document.getElementById("endpointURL").value = inArguments[0].endpointURL;
             document.getElementById("jsonBody").value = inArguments[0].jsonBody;
-            document.getElementById("jsonBody").value = inArguments[0].authBody;            
+            document.getElementById("authBody").value = inArguments[0].authBody;            
             contactKey = inArguments[0].contactIdentifier
         }
 
