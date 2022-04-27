@@ -76,21 +76,21 @@ define(["postmonger"], function (Postmonger) {
         // this would be set on the server side when the activity executes
         // (take a look at execute() in ./discountCode/app.js to see where that happens)
 
-        const endpointArgument = inArguments.find((arg) => arg.endpointURL);
-        console.log('Endpoint Argument', endpointArgument.endpointURL);
+        const endpointArgument = inArguments.find((arg) => arg.endpointURL);        
         if (endpointArgument) {
+            console.log('Endpoint Argument', endpointArgument.endpointURL);
             updateEndpointURL(endpointArgument.endpointURL);
         }
 
-        const jsonBodyArgument = inArguments.find((arg) => arg.jsonBody);
-        console.log('jsonBody Argument', jsonBodyArgument.jsonBody);
+        const jsonBodyArgument = inArguments.find((arg) => arg.jsonBody);        
         if (jsonBodyArgument) {
+            console.log('jsonBody Argument', jsonBodyArgument.jsonBody);
             updateJsonBody(jsonBodyArgument.jsonBody);            
         }
 
-        const authBodyArgument = inArguments.find((arg) => arg.authBody);
-        console.log('authBody Argument', authBodyArgument.authBody);
+        const authBodyArgument = inArguments.find((arg) => arg.authBody);        
         if (authBodyArgument) {
+            console.log('authBody Argument', authBodyArgument.authBody);
             updateAuthBody(authBodyArgument.jsonBody);            
         }
 
