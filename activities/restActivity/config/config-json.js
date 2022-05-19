@@ -19,13 +19,7 @@ module.exports = function configJSON(req) {
       },
       arguments: {
         execute: {
-          inArguments: [
-            {
-              contactIdentifier: "{{Contact.Key}}"
-            },
-            {
-              fisrtName: '{{Contact.Demographics.First_Name}}'
-            },
+          inArguments: [            
             {
               jsonBody: `{ 
                 "EndpointArguments": {
@@ -36,7 +30,7 @@ module.exports = function configJSON(req) {
                    "responeKey1" : "BOOLEAN", 
                    "responeKey2" : "TEXT"                   
                 }
-            }`
+              }`
             },
             {
               authBody: `{

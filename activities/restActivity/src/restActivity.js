@@ -214,11 +214,30 @@ function setupExampleTestHarness() {
                 activityId: "{{Activity.Id}}",
                 contactKey: "{{Context.ContactKey}}",
                 execute: {
-                    inArguments: [
+                    inArguments: [                        
                         {
-                            discount: 10
+                          jsonBody: `{ 
+                            "EndpointArguments": {
+                                 "customerID" : "ABC123" , 
+                                 "property1key" : "property1Value" 
+                            },
+                            "JourneyBuilderSchema": {
+                               "responeKey1" : "BOOLEAN", 
+                               "responeKey2" : "TEXT"                   
+                            }
+                          }`
+                        },
+                        {
+                          authBody: `{
+                            "clientID" : "ABC123", 
+                            "clientSeceret" : "ABC123", 
+                            "AuthEndpoint" : "http://yourAuthEndpoint.com"
+                          }`
+                        },
+                        {
+                          endpointURL: "https://experts-jb-activity-lib.herokuapp.com/api"
                         }
-                    ],
+                      ],
                     outArguments: []
                 },
                 startActivityKey: "{{Context.StartActivityKey}}",

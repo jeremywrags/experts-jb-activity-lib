@@ -29,13 +29,13 @@
         
     </script>
     <script type="text/javascript">
+
         $(document).ready(function () {
             $(document).on("blur", "#jsonBody", function () {
                 try {
                     let jsBody = JSON.parse($(this).val());
                     let activityKey = $("#activityKey").val();
                     $("#dbProperties").empty();
-                    
                     let newSchema = jsBody.JourneyBuilderSchema
                     for(var key in newSchema){
                         $("#dbProperties").append("<li>{{" + activityKey + ".Interactions." + key + "}}</li>");
@@ -95,16 +95,10 @@
             </header>
         </div>
         <div class="slds-card__body slds-card__body_inner">
-
-
-
-
-
-
             <div class="slds-grid slds-wrap">
                 <div class="slds-col slds-size_1-of-12">
                     <div class="slds-form-element">
-                        <div style="width: 70px;" class="slds-form-element__control">
+                        <div style="width: 100px;" class="slds-form-element__control">
                             <div class="slds-select_container">
                                 <select class="slds-select" id="httpVerb">
                                     <option>POST</option>
@@ -312,6 +306,59 @@
                                         </ul>
                                         </div>
                                     </div>
+                                </div>
+                            </section>
+                        </li>
+                        <li class="slds-accordion__list-item">
+                            <section class="slds-accordion__section">
+                                <div class="accordionAction slds-accordion__summary">
+                                    <h2 class="slds-accordion__summary-heading">
+                                        <button class="slds-button slds-button_reset slds-accordion__summary-action"
+                                            aria-controls="referenceId-24" aria-expanded="true"
+                                            title="Accordion summary">
+                                            <svg class="slds-accordion__summary-action-icon slds-button__icon slds-button__icon_left"
+                                                aria-hidden="true">
+                                                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#switch">
+                                                </use>
+                                            </svg>
+                                            <span class="slds-accordion__summary-content">Auth</span>
+                                        </button>
+                                    </h2>
+                                    <div class="slds-dropdown-trigger slds-dropdown-trigger_click">
+                                        <button
+                                            class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small"
+                                            aria-haspopup="true" title="Show More">
+                                            <svg class="slds-button__icon" aria-hidden="true">
+                                                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down">
+                                                </use>
+                                            </svg>
+                                            <span class="slds-assistive-text">Show More</span>
+                                        </button>
+                                        <div class="slds-dropdown slds-dropdown_actions slds-dropdown_right">
+                                            <ul class="slds-dropdown__list" role="menu">
+                                                <li class="slds-dropdown__item" role="presentation">
+                                                    <a href="#" role="menuitem" tabindex="0">
+                                                        <span class="slds-truncate" title="Action One">Action One</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-accordion__content" id="referenceId-24">
+                                    <div class="slds-p-around_small">
+                                        If your enpoint requires auth you can include the auth payload details in the Auth tab, here is an example
+                                    </div>                           
+                                    <div class="slds-p-around_small">
+                                        <pre><code>
+                                    {
+                                        "authURL" :  "https://mcdgh6zb-3v79rzh9lbzr6m-1pxq.auth.marketingcloudapis.com/v2/token",
+                                        "grant_type": "client_credentials",
+                                        "client_id": "ABC123",
+                                        "client_secret": "ABC123"
+                                    }
+                                    </code></pre>
+                                </div>         
                                 </div>
                             </section>
                         </li>
