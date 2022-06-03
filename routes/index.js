@@ -22,7 +22,7 @@ var upload = multer({
   storage: storage,
   fileFilter: function (req, file, cb) {
     let ext = path.extname(file.originalname);
-    if (ext !== '.png') {
+    if (ext.toLowerCase() !== '.png') {
          req.fileValidationError = "Forbidden extension must be a png";
          return cb(null, false, req.fileValidationError);
    }
